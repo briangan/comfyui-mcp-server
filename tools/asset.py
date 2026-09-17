@@ -3,7 +3,9 @@
 import logging
 from typing import Optional
 
-from mcp.server.fastmcp import FastMCP, Image as FastMCPImage
+# Used to be in mcp<2: from mcp.server.fastmcp import FastMCP, Image as FastMCPImage
+from mcp.server.mcpserver import MCPServer, Image as FastMCPImage
+
 from asset_processor import (
     encode_preview_for_mcp,
     estimate_response_chars,
@@ -15,7 +17,7 @@ logger = logging.getLogger("MCP_Server")
 
 
 def register_asset_tools(
-    mcp: FastMCP,
+    mcp: MCPServer,
     asset_registry
 ):
     """Register asset viewing tools with the MCP server"""

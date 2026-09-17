@@ -4,7 +4,8 @@ import logging
 from pathlib import Path
 from typing import Optional
 
-from mcp.server.fastmcp import FastMCP
+# from mcp.server.fastmcp import FastMCP
+from mcp.server.mcpserver import MCPServer
 
 from managers.publish_manager import (
     PublishManager,
@@ -17,7 +18,7 @@ logger = logging.getLogger("MCP_Server")
 
 
 def register_publish_tools(
-    mcp: FastMCP,
+    mcp: MCPServer,
     asset_registry,
     publish_manager: PublishManager
 ):

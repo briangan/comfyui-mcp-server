@@ -2,7 +2,8 @@
 import pytest
 from unittest.mock import Mock
 from tools.job import register_job_tools
-from mcp.server.fastmcp import FastMCP
+# from mcp.server.fastmcp import FastMCP
+from mcp.server.mcpserver import MCPServer
 
 
 @pytest.fixture
@@ -35,7 +36,8 @@ def mock_asset_registry():
 
 def test_get_queue_status_integration(mock_comfyui_client, mock_asset_registry):
     """Test that get_queue_status tool is registered and works"""
-    mcp = FastMCP("test")
+    # mcp = FastMCP("test")
+    mcp = MCPServer("test")
     register_job_tools(mcp, mock_comfyui_client, mock_asset_registry)
     
     # Verify tool is registered by checking tools list

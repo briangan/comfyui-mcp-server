@@ -2,11 +2,12 @@
 
 from typing import Any, Dict, Optional
 
-from mcp.server.fastmcp import FastMCP
+# from mcp.server.fastmcp import FastMCP
+from mcp.server.mcpserver import MCPServer
 
 
 def register_configuration_tools(
-    mcp: FastMCP,
+    mcp: MCPServer,
     comfyui_client,
     defaults_manager
 ):

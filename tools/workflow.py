@@ -3,14 +3,16 @@
 import logging
 from typing import Any, Dict, Optional
 
-from mcp.server.fastmcp import FastMCP
+# from mcp.server.fastmcp import FastMCP
+from mcp.server.mcpserver import MCPServer
+
 from tools.helpers import register_and_build_response
 
 logger = logging.getLogger("MCP_Server")
 
 
 def register_workflow_tools(
-    mcp: FastMCP,
+    mcp: MCPServer,
     workflow_manager,
     comfyui_client,
     defaults_manager,

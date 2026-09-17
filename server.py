@@ -10,7 +10,10 @@ from typing import AsyncIterator
 
 import requests
 
-from mcp.server.fastmcp import FastMCP
+# Used to be in  mcp<2: from mcp.server.fastmcp import FastMCP #
+
+# Reference: https://py.sdk.modelcontextprotocol.io/v2/migration/#fastmcp-renamed-to-mcpserver 
+from mcp.server.mcpserver import MCPServer
 
 from comfyui_client import ComfyUIClient
 from managers.asset_registry import AssetRegistry
@@ -168,7 +171,7 @@ class AppContext:
 
 # Lifespan management (placeholder for future context support)
 @asynccontextmanager
-async def app_lifespan(server: FastMCP) -> AsyncIterator[AppContext]:
+async def app_lifespan(server: MCPServer) -> AsyncIterator[AppContext]:
     """Manage application lifecycle"""
     logger.info("Starting MCP server lifecycle...")
     try:
@@ -180,15 +183,20 @@ async def app_lifespan(server: FastMCP) -> AsyncIterator[AppContext]:
         logger.info("Shutting down MCP server")
 
 
-# Initialize FastMCP with lifespan and port configuration
+# Initialize MCPServer with lifespan and port configuration
 # Using port 9000 for consistency with previous version
 # Enable stateless_http to avoid requiring session management
-mcp = FastMCP(
-    "ComfyUI_MCP_Server",
-    lifespan=app_lifespan,
-    port=9000,
-    stateless_http=True
-)
+# Used to be in mcp<2:  
+#   mcp = MCPServer(
+#     "ComfyUI_MCP_Server",
+#     lifespan=app_lifespan,
+#     port=9000,
+#     stateless_http=True
+#   )
+
+mcp = MCPServer("ComfyUI_MCP_Server")
+# Sample run: mcp.run(transport="streamable-http", host="0.0.0.0", port=9000, json_response=True, stateless_http=True)
+
 
 # Register all MCP tools
 register_configuration_tools(mcp, comfyui_client, defaults_manager)
@@ -217,7 +225,8 @@ if __name__ == "__main__":
         logger.info("Starting MCP server with stdio transport (for MCP clients)")
         logger.info(f"ComfyUI verified at: {COMFYUI_URL}")
         try:
-            mcp.run(transport="stdio")
+            # Used to be in mcp<2: mcp.run(transport="stdio")
+            mcp.run(transport="stdio", host="0.0.0.0", port=9000, stateless_http=True)
         except KeyboardInterrupt:
             print("\n[*] Server stopped.")
     else:
@@ -231,6 +240,7 @@ if __name__ == "__main__":
         logger.info("Starting MCP server with streamable-http transport on http://127.0.0.1:9000/mcp")
         logger.info(f"ComfyUI verified at: {COMFYUI_URL}")
         try:
-            mcp.run(transport="streamable-http")
+            # Used to be inmcp<2: mcp.run(transport="streamable-http")
+            mcp.run(transport="streamable-http", host="0.0.0.0", port=9000, stateless_http=True)
         except KeyboardInterrupt:
             print("\n[*] Server stopped.")

@@ -6,7 +6,9 @@ import logging
 import random
 from typing import Any, Dict, Optional
 
-from mcp.server.fastmcp import FastMCP
+# from mcp.server.fastmcp import FastMCP
+from mcp.server.mcpserver import MCPServer
+
 from managers.workflow_manager import AUDIO_OUTPUT_KEYS, VIDEO_OUTPUT_KEYS
 from models.workflow import WorkflowToolDefinition
 from tools.helpers import register_and_build_response
@@ -15,7 +17,7 @@ logger = logging.getLogger("MCP_Server")
 
 
 def register_workflow_generation_tools(
-    mcp: FastMCP,
+    mcp: MCPServer,
     workflow_manager,
     comfyui_client,
     defaults_manager,
@@ -337,7 +339,7 @@ def _update_seed(workflow: dict, seed: Optional[int]) -> dict:
 
 
 def register_regenerate_tool(
-    mcp: FastMCP,
+    mcp: MCPServer,
     comfyui_client,
     asset_registry
 ):

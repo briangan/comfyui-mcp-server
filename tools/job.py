@@ -3,13 +3,15 @@
 import logging
 from typing import Any, Dict, List, Optional
 
-from mcp.server.fastmcp import FastMCP
+# from mcp.server.fastmcp import FastMCP
+from mcp.server.mcpserver import MCPServer
+
 
 logger = logging.getLogger("MCP_Server")
 
 
 def register_job_tools(
-    mcp: FastMCP,
+    mcp: MCPServer,
     comfyui_client,
     asset_registry
 ):
